@@ -10,6 +10,57 @@ python -m pip install django==4.1.1
 django-admin startproject hollymovies .
 ```
 
+## Spusteni serveru (defaultne na portu 8000)
+```python
+python manage.py runserver
+```
+
+## port muzeme zmenit parametrem:
+```python
+python manage.py runserver 8001
+```
+
+
+## Vytvoreni aplikace
+
+viewer = nazev aplikace
+```python
+python manage.py startapp viewer
+```
+Vznikla nova slozka "Viewer", ktera obsahuje:
+    - slozka migrations (obsahuje migracni skripty, lepsi neupravovat)
+    - slozka admin.py - zde budeme registrovat modely, ktere chceme zobrazit
+                       v administracni casti projektu
+    - apps.py - nastaveni aplikace (neni treba menit)
+    - tests.py - zde uvadime testy
+    - views.py - zde bude naprogramovana funkcionalita aplikace
+
+
+## Registrace aplikace do Djanga
+
+V souboru /hollymovies/settings.py pridame aplikaci "viewer" do listu "INSTALLED_APPS"
+
+
+
+## Zobrazovani obsahu
+do views.py pridam funkci --> do urls.py pridam cestu --> spustim server
+
+
+## Vytvoreni migracniho skriptu
+```python
+python manage.py makemigrations
+```
+
+## Provedeme zmeny v databazi
+```python
+python manage.py migrate
+```
+
+## Zakladni struktura projektu (hollymovies)
+    -settings.py - zde je veskere nastaveni projektu
+    -urls.py - zde jsou uvedeny url adresy, na ktere 
+               budou navazane funkce
+
 ## Rady a tipy pro finalni projekt
 
 -vytvorit readme.md soubor s popisem projektu, muze obsahovat

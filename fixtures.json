@@ -1,0 +1,78 @@
+[
+  {
+    "model": "viewer.genre",
+    "pk": 1,
+    "fields": {
+      "name": "Horror"
+    }
+  },
+  {
+    "model": "viewer.genre",
+    "pk": 2,
+    "fields": {
+      "name": "Thriller"
+    }
+  },
+  {
+    "model": "viewer.genre",
+    "pk": 3,
+    "fields": {
+      "name": "Drama"
+    }
+  },
+  {
+    "model": "viewer.genre",
+    "pk": 4,
+    "fields": {
+      "name": "Fantasy"
+    }
+  },
+  {
+    "model": "viewer.movie",
+    "pk": 1,
+    "fields": {
+      "title": "Dune: Part 2",
+      "genre": 3,
+      "rating": 86,
+      "released": "2024-05-22",
+      "description": "Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.",
+      "created": "2024-05-22T17:31:10.210Z"
+    }
+  },
+  {
+    "model": "viewer.movie",
+    "pk": 2,
+    "fields": {
+      "title": "Harry Potter and the Sorcerer's Stone",
+      "genre": 4,
+      "rating": 76,
+      "released": "2024-05-22",
+      "description": "An orphaned boy enrolls in a school of wizardry, where he learns the truth about himself, his family and the terrible evil that haunts the magical world.",
+      "created": "2024-05-22T17:41:05.145Z"
+    }
+  },
+  {
+    "model": "viewer.movie",
+    "pk": 3,
+    "fields": {
+      "title": "The Hobbit: The Battle of the Five Armies",
+      "genre": 4,
+      "rating": 74,
+      "released": "2024-05-22",
+      "description": "Bilbo Baggins and company are forced to engage in a war against an array of combatants and keep the Lonely Mountain from falling into the hands of a rising darkness.",
+      "created": "2024-05-22T17:42:17.502Z"
+    }
+  },
+  {
+    "model": "viewer.movie",
+    "pk": 4,
+    "fields": {
+      "title": "TheLord of the Rings: The Fellowship of the Ring",
+      "genre": 4,
+      "rating": 89,
+      "released": "2024-05-22",
+      "description": "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.",
+      "created": "2024-05-22T17:42:43.503Z"
+    }
+  }
+]

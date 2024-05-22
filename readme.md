@@ -56,6 +56,53 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
+## Shell
+```python
+python manage.py shell
+```
+Nejdriv import modelu:
+from viewer.models import Genre
+zde mohu zobrazovat a pridavat veci do databaze.
+    Zobrazeni:
+        Vse:        
+            Query.objects.all()
+        Neco:
+            horror = Genre.objects.get(name='Horror')   ##horror je akorat promenna, do ktere ukladam vysledek
+            print(horror)  
+
+    Pridani:
+        Option 1: 
+        Genre.objects.create(name="Horrors")
+        Option 2:
+        genre = Genre(name="Thriller")
+        genre.save()
+ 
+
+## Vytvoreni administratora
+```python
+python manage.py createsuperuser
+```
+Pak prejdu do souboru "admin.py" a zaregistuju classy
+
+
+## Export databaze
+```python
+python manage.py dumpdata viewer --output fixtures.json
+```
+
+## Import databaze
+```python
+python manage.py loaddata fixtures.json
+```
+Nefunguje s diakritikou. Pokud chceme diakritiku, nainstalujeme rozsireni:
+```bash
+pip install django-dump-load_utf8
+```
++ je potreba pridat radek do settings.py, sekce INSTALLED_APPS: 'django_dump_load_utf8'
+Pak muzu exportovat pomoci rozsireni:
+    python manage.py dumpdatautf8 viewer --output fixtures.json
+
+
 ## Zakladni struktura projektu (hollymovies)
     -settings.py - zde je veskere nastaveni projektu
     -urls.py - zde jsou uvedeny url adresy, na ktere 

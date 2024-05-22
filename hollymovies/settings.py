@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'viewer',
+    'django_dump_load_utf8',
 ]
 
 MIDDLEWARE = [

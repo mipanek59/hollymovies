@@ -102,6 +102,22 @@ pip install django-dump-load_utf8
 Pak muzu exportovat pomoci rozsireni:
     python manage.py dumpdatautf8 viewer --output fixtures.json
 
+## Filtrovani v shellu (nesmim zapomenout naimportovat classy)
+Movie.objects.filter(released__year=1994)
+Movie.objects.filter(rating__lt=90)
+## Count
+Movie.objects.filter(title="Harry Potter").count()
+## Order by
+Movie.objects.filter(title_contains="Harry Potter).order_by('released')   #od nejstarsiho
+Movie.objects.filter(title_contains="Harry Potter).order_by('-released')  #od nejnovejsiho
+## Data manipulation - Update
+Movie.objects.filter(released__year=2000).update(rating=5)   #sets movie ratings from year 2000 to 5
+    To save data
+pulp_fiction = Movie.objects.get(title='Pulp Fiction')
+pulp_fiction.rating = 7
+pulp.fiction.save()
+## Delete
+Movie.objects.filter(title_contains="Harry Potter).delete()
 
 ## Zakladni struktura projektu (hollymovies)
     -settings.py - zde je veskere nastaveni projektu

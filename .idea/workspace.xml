@@ -5,17 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ef7c2b4-81cf-414a-985f-4d26b611750c" name="Changes" comment="new mode - genre">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fixtures.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/viewer/templates/base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/viewer/templates/hello.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/viewer/templates/movies.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hollymovies/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/hollymovies/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hollymovies/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/hollymovies/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/viewer/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -45,6 +52,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
     "Python.python -m pip install django==4.1.1.executor": "Debug",
     "Python.python manage.py startapp viewer.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -131,7 +139,8 @@
       <option name="presentableId" value="Default" />
       <updated>1716220523781</updated>
       <workItem from="1716220526306" duration="10530000" />
-      <workItem from="1716392280597" duration="9918000" />
+      <workItem from="1716392280597" duration="10158000" />
+      <workItem from="1716478613803" duration="8084000" />
     </task>
     <task id="LOCAL-00001" summary="starting project">
       <option name="closed" value="true" />
@@ -157,7 +166,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716232253154</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="new mode - genre">
+      <option name="closed" value="true" />
+      <created>1716402517659</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1716402517659</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

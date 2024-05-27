@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>List of genres</h1>
+<ul>
+    {% for genre in genres %}
+        <li>
+            {% if genre.movies_count %}
+                <a href="{% url 'genre' genre.id %}">
+            {% endif %}
+            {{ genre.name }}
+            {% if genre.movies_count %}
+                </a>
+            {% endif %}
+            (count: {{ genre.movies_count }})
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

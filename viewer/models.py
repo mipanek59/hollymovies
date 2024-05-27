@@ -12,9 +12,11 @@ class Genre(Model):
     def __str__(self):
         return f"{self.name}"
 
+    def movies_count(self):
+        # return Movie.objects.filter(genre=self).count()
+        return self.movie_set.all().count()
 
 class Movie(Model):
-    objects = None
     title = CharField(max_length=182, null=True, blank=True)
     genre = ForeignKey(Genre, on_delete=DO_NOTHING)
     rating = IntegerField(null=True, blank=True)

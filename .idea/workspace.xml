@@ -4,13 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ef7c2b4-81cf-414a-985f-4d26b611750c" name="Changes" comment="new mode - genre">
-      <change afterPath="$PROJECT_DIR$/viewer/templates/base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/viewer/templates/hello.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/viewer/templates/movies.html" afterDir="false" />
+    <list default="true" id="1ef7c2b4-81cf-414a-985f-4d26b611750c" name="Changes" comment="genre list">
+      <change afterPath="$PROJECT_DIR$/viewer/migrations/0015_people_movie_actors_movie_directors.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/viewer/templates/movies2.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hollymovies/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/hollymovies/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/viewer/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/viewer/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/viewer/templates/hello.html" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/templates/hello.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/viewer/templates/movie.html" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/templates/movie.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/viewer/templates/movies.html" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/templates/movies.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/viewer/templates/movies_by_genre.html" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/templates/movies_by_genre.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +29,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -50,24 +59,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Python.python -m pip install django==4.1.1.executor": "Debug",
-    "Python.python manage.py startapp viewer.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "database.data.extractors.current.export.id": "JSON-Groovy.json.groovy",
-    "database.data.extractors.current.id": "JSON-Groovy.json.groovy",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/patak/PycharmProjects/hollymovies/db.sqlite3",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Python.python -m pip install django==4.1.1.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.python manage.py startapp viewer.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;database.data.extractors.current.export.id&quot;: &quot;JSON-Groovy.json.groovy&quot;,
+    &quot;database.data.extractors.current.id&quot;: &quot;JSON-Groovy.json.groovy&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;viewer__models__part__2&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/patak/PycharmProjects/hollymovies/db.sqlite3&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Python.python manage.py startapp viewer">
     <configuration name="python -m pip install django==4.1.1" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="hollymovies" />
@@ -119,6 +128,8 @@
       <list>
         <item itemvalue="Python.python manage.py startapp viewer" />
         <item itemvalue="Python.python -m pip install django==4.1.1" />
+        <item itemvalue="Python.python manage.py startapp viewer" />
+        <item itemvalue="Python.python -m pip install django==4.1.1" />
       </list>
     </recent_temporary>
   </component>
@@ -140,7 +151,10 @@
       <updated>1716220523781</updated>
       <workItem from="1716220526306" duration="10530000" />
       <workItem from="1716392280597" duration="10158000" />
-      <workItem from="1716478613803" duration="8084000" />
+      <workItem from="1716478613803" duration="10164000" />
+      <workItem from="1716823880014" duration="11235000" />
+      <workItem from="1716910252432" duration="4394000" />
+      <workItem from="1716915998158" duration="6070000" />
     </task>
     <task id="LOCAL-00001" summary="starting project">
       <option name="closed" value="true" />
@@ -174,7 +188,31 @@
       <option name="project" value="LOCAL" />
       <updated>1716402517659</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="new mode - genre">
+      <option name="closed" value="true" />
+      <created>1716487318261</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1716487318261</updated>
+    </task>
+    <task id="LOCAL-00006" summary="new mode - genre">
+      <option name="closed" value="true" />
+      <created>1716826187994</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1716826187994</updated>
+    </task>
+    <task id="LOCAL-00007" summary="genre list">
+      <option name="closed" value="true" />
+      <created>1716830549058</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1716830549058</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -185,7 +223,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="viewer_models_part_2" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -194,7 +244,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="starting project" />
     <MESSAGE value="new mode - genre" />
-    <option name="LAST_COMMIT_MESSAGE" value="new mode - genre" />
+    <MESSAGE value="genre list" />
+    <option name="LAST_COMMIT_MESSAGE" value="genre list" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/hollymovies$python__m_pip_install_django__4_1_1.coverage" NAME="python -m pip install django==4.1.1 Coverage Results" MODIFIED="1716223248566" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

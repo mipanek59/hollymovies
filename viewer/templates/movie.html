@@ -1,12 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1> {{ movie.title }} </h1>
+<h1>{{ movie.title_orig }}</h1>
+<h2 class="movie-title-cz">{{ movie.title_cz }}</h2>
 <div class="movie-details">
-    <div class="movie-genre">{{ movie.genre }}</div>
-    <div class="movie-rating">{{movie.rating }}</div>
-    <div class="movie-released">{{movie.released }}</div>
-    <div class="movie-description">{{movie.description }}</div>
+    <div class="movie-genre">Žánry: {{ movie.print_genres }} </div>
+    <div class="movie-countries">Země: {{ movie.print_countries }} </div>
+    <div class="movie-length">Délka: {{ movie.length }} min </div>
+    <div class="movie-rating">Hodnocení: {{ movie.rating }}%</div>
+    <div class="movie-director">Režie: {{ movie.print_directors }}</div>
+    <div class="movie-actors">Hrají: {{ movie.print_actors }}</div>
+    <div class="movie-released">Premiéra: {{ movie.released }}</div>
+    <div class="movie-description">Popis: {{ movie.description }}</div>
 </div>
-
 {% endblock %}

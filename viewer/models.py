@@ -1,6 +1,7 @@
+from datetime import date
+
 from django.db.models import *  #(Model, CharField, ForeignKey, DO_NOTHING,
                                 #IntegerField, DateField, TextField, DateTimeField)
-
 
 class Genre(Model):
     name = CharField(max_length=16, null=False, blank=False)
@@ -44,7 +45,26 @@ class People(Model):
         verbose_name_plural = 'People'
 
     def __str__(self):
-        return f"{self.surname}, {self.name} ({self.date_of_birth})"
+        result = ""
+        if self.name:
+            result += self.name
+        if self.surname:
+            result += " " + self.surname
+        if self.date_of_birth:
+            result += f" ({self.date_of_birth.year})"
+        return result
+
+
+    def calculate_age(self):
+        if not self.date_of_birth:
+            return None
+        today = date.today()
+        age = today.year - self.date_of_birth.year
+        if today.month < self.date_of_birth.month or (
+                today.month == self.date_of_birth.month and today.day < self.date_of_birth.day):
+            age -= 1
+        return age
+
 
 class Movie(Model):
     title_orig = CharField(max_length=185, null=True, blank=False)  # https://cs.wikipedia.org/wiki/Lopadotemachoselachogaleokranioleipsanodrimhypotrimmatosilphioparaomelitokatakechymenokichlepikossyphophattoperisteralektryonoptekephalliokigklopeleiolagoiosiraiobaphetraganopterygon

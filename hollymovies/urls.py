@@ -41,4 +41,6 @@ urlpatterns = [
     #path('genre/<pk>/', genre, name='genre'),  # functional view
     #path('genre/<pk>/', GenreView.as_view(), name='genre'),  # CBV: View
     path('genre/<pk>/', GenreTemplateView.as_view(), name='genre'),  # CBV: TemplateView
+    path('creators/', CreatorsTemplateView.as_view(), name='creators'),  # CBV: ListView
+    path('creator/<pk>/', CreatorTemplateView.as_view(), name='creator')
 ]

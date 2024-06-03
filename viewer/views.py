@@ -1,11 +1,13 @@
+from django.forms import Form
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, FormView, CreateView
 
 from viewer.models import *
 
+from django.forms import *
 
 def hello(request):
     return HttpResponse('Hello, world!')
@@ -184,3 +186,56 @@ class CreatorTemplateView(TemplateView):
         context["creator"] = People.objects.get(id=pk)
         return context
 
+"""
+# Forms
+class MovieForm(Form):
+    title_orig = CharField(max_length=185)  # https://cs.wikipedia.org/wiki/Lopadotemachoselachogaleokranioleipsanodrimhypotrimmatosilphioparaomelitokatakechymenokichlepikossyphophattoperisteralektryonoptekephalliokigklopeleiolagoiosiraiobaphetraganopterygon
+    title_cz = CharField(max_length=185, required=False)
+    # countries = ModelChoiceField(queryset=Country)
+    # directors = ModelChoiceField(queryset=People)
+    # actors = ModelChoiceField(queryset=People)
+    length = IntegerField(min_value=1, required=False)
+    # genre = ModelChoiceField(queryset=Genre)
+    # genres = ModelChoiceField(queryset=Genre)
+    rating = IntegerField(min_value=0, max_value=100, required=False)
+    released = DateField()
+    description = CharField(widget=Textarea, required=False)
+"""
+"""
+class MovieCreateView(FormView):
+    template_name = 'form.html'
+    form_class = MovieForm
+"""
+"""
+class MovieCreate(View):
+
+    def get(self, request):
+        if request.method == 'GET':
+            title_orig = request.GET.get("title_orig")
+            title_cz = request.GET.get("title_cz")
+            length = request.GET.get("length")
+            rating = request.GET.get("rating")
+            released = request.GET.get("released")
+            description = request.GET.get("description")
+            Movie.objects.create(
+                title_orig=title_orig,
+                title_cz=title_cz,
+                length=length,
+                rating=rating,
+                released=released,
+                description=description
+            )
+            return movies(request)
+"""
+
+class MovieModelForm(ModelForm):
+
+    class Meta:
+        model = Movie
+        fields = '__all__'
+
+
+class MovieCreateView(CreateView):
+    template_name = 'form.html'
+    form_class = MovieModelForm
+    success_url = reverse_lazy('movies')

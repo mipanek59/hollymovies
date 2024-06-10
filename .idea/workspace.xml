@@ -4,14 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ef7c2b4-81cf-414a-985f-4d26b611750c" name="Changes" comment="genre list">
-      <change afterPath="$PROJECT_DIR$/viewer/templates/creator.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/viewer/templates/creators.html" afterDir="false" />
+    <list default="true" id="1ef7c2b4-81cf-414a-985f-4d26b611750c" name="Changes" comment="creators - forms">
+      <change afterPath="$PROJECT_DIR$/viewer/templates/creator_confirm_delete.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/viewer/templates/form_creator.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/viewer/templates/form_movie.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hollymovies/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/hollymovies/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hollymovies/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/hollymovies/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/viewer/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/viewer/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/viewer/templates/movie.html" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/templates/movie.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/viewer/templates/creator.html" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/templates/creator.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/viewer/templates/creators.html" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/templates/creators.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/viewer/templates/form.html" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/templates/form.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/viewer/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/viewer/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,7 +33,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="forms" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -131,6 +135,7 @@
         <item itemvalue="Python.python -m pip install django==4.1.1" />
         <item itemvalue="Python.python manage.py startapp viewer" />
         <item itemvalue="Python.python -m pip install django==4.1.1" />
+        <item itemvalue="Python.python manage.py startapp viewer" />
       </list>
     </recent_temporary>
   </component>
@@ -156,7 +161,10 @@
       <workItem from="1716823880014" duration="11235000" />
       <workItem from="1716910252432" duration="4394000" />
       <workItem from="1716915998158" duration="6070000" />
-      <workItem from="1716996709368" duration="11135000" />
+      <workItem from="1716996709368" duration="11311000" />
+      <workItem from="1717341566226" duration="8117000" />
+      <workItem from="1717431687013" duration="4488000" />
+      <workItem from="1718033408298" duration="7141000" />
     </task>
     <task id="LOCAL-00001" summary="starting project">
       <option name="closed" value="true" />
@@ -214,7 +222,23 @@
       <option name="project" value="LOCAL" />
       <updated>1716830549058</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="creators - actor and directors">
+      <option name="closed" value="true" />
+      <created>1717008311375</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1717008311375</updated>
+    </task>
+    <task id="LOCAL-00009" summary="creators - forms">
+      <option name="closed" value="true" />
+      <created>1717433344401</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1717433344401</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -231,7 +255,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="viewer_models_part_2" />
+                        <option value="master" />
                       </list>
                     </value>
                   </entry>
@@ -247,7 +271,9 @@
     <MESSAGE value="starting project" />
     <MESSAGE value="new mode - genre" />
     <MESSAGE value="genre list" />
-    <option name="LAST_COMMIT_MESSAGE" value="genre list" />
+    <MESSAGE value="creators - actor and directors" />
+    <MESSAGE value="creators - forms" />
+    <option name="LAST_COMMIT_MESSAGE" value="creators - forms" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/hollymovies$python__m_pip_install_django__4_1_1.coverage" NAME="python -m pip install django==4.1.1 Coverage Results" MODIFIED="1716223248566" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

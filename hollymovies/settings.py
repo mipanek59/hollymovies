@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'viewer',
     'django_dump_load_utf8',
+    'django_addanother',
 ]
 
 MIDDLEWARE = [

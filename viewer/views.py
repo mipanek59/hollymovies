@@ -1,10 +1,13 @@
+from concurrent.futures._base import LOGGER
+
 from django.forms import Form
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import TemplateView, ListView, FormView, CreateView
-
+from django.views.generic import TemplateView, ListView, FormView, CreateView, DeleteView, UpdateView
+from django_addanother.views import CreatePopupMixin
+from django_addanother.widgets import AddAnotherWidgetWrapper
 from viewer.models import *
 
 from django.forms import *
@@ -177,6 +180,12 @@ class CreatorsTemplateView(TemplateView):
         return context
 
 
+class CreatorsListView(ListView):
+    template_name = "creators.html"
+    model = People
+    context_object_name = "creators"
+
+
 class CreatorTemplateView(TemplateView):
     template_name = "creator.html"
 
@@ -228,14 +237,153 @@ class MovieCreate(View):
             return movies(request)
 """
 
+def capitalized_validator(value):
+    if value[0].islower():
+        raise ValidationError("Value must be capitalized")
+
+
+class PastMonthField(DateField):
+
+    def validate(self, value):
+        super().validate(value)
+        if value >= date.today():
+            raise ValidationError('Only past dates allowed here.')
+
+    def clean(self, value):
+        result = super().clean(value)
+        return date(year=result.year, month=result.month, day=1)
+
+
 class MovieModelForm(ModelForm):
 
     class Meta:
         model = Movie
-        fields = '__all__'
+        fields = '__all__'   ## pokud chci zobrazit vsechny
+        # fields = ['title_orig', 'title_cz', 'length', 'rating', 'released', 'description']
+        # exclude = ['released', 'description']
+        widgets = {
+            'directors': AddAnotherWidgetWrapper(
+                SelectMultiple,
+                reverse_lazy('creator_create')
+            )
+        }
+
+    rating = IntegerField(min_value=0, max_value=100)
+    length = IntegerField(min_value=1)
+    released = DateField(widget=NumberInput(attrs={'type': 'date'}))
+
+    def clean_title_orig(self):
+        initial = self.cleaned_data['title_orig']
+        return initial.strip()
+
+    def clean_title_cz(self):
+        initial = self.cleaned_data['title_cz']
+        return initial.strip()
 
 
 class MovieCreateView(CreateView):
     template_name = 'form.html'
     form_class = MovieModelForm
     success_url = reverse_lazy('movies')
+
+    def form_invalid(self, form):
+        LOGGER.warning('Form invalid')
+        return super().form_invalid(form)
+
+
+class PeopleForm(Form):
+    name = CharField(max_length=32)
+    surname = CharField(max_length=32, required=False)
+    date_of_birth = DateField(required=False)
+    date_of_death = DateField(required=False)
+    place_of_birth = CharField(max_length=64, required=False)
+    place_of_death = CharField(max_length=64, required=False)
+    country = ModelChoiceField(queryset=Country.objects)
+    biography = CharField(widget=Textarea, required=False)
+
+    def clean_name(self):
+        #initial_data = super().clean()  # původní data od uživatele ve formuláři
+        #initial_name = initial_data['name']  # původní name od uživatele
+        initial_name = self.cleaned_data['name']  # původní name od uživatele
+        return initial_name.strip().capitalize()  # odstraníme prázdné znaky na začátku a konci textu + zvětšíme první znak
+
+    def clean(self):
+        initial_data = super().clean()
+        if initial_data['date_of_birth'] and initial_data['date_of_death']:
+            if initial_data['date_of_birth'] >= initial_data['date_of_death']:
+                raise ValidationError("Date of death must be after date of birth.")
+        return initial_data
+
+
+class PeopleCreateFormView(FormView):
+    template_name = 'form.html'
+    form_class = PeopleForm
+    success_url = reverse_lazy('creators')
+
+    def form_valid(self, form):
+        result = super().form_valid(form)
+        cleaned_data = form.cleaned_data
+        People.objects.create(
+            name=cleaned_data['name'],
+            surname=cleaned_data['surname'],
+            date_of_birth=cleaned_data['date_of_birth'],
+            date_of_death=cleaned_data['date_of_death'],
+            place_of_birth=cleaned_data['place_of_birth'],
+            place_of_death=cleaned_data['place_of_death'],
+            country=cleaned_data['country'],
+            biography=cleaned_data['biography']
+        )
+        return result
+
+    def form_invalid(self, form):
+        LOGGER.warning('User provided invalid data.')
+        return super().form_invalid(form)
+
+
+class PeopleModelForm(ModelForm):
+    class Meta:
+        model = People
+        fields = '__all__'
+
+
+    #date_of_birth = DateField(widget=SelectDateWidget)
+    date_of_birth = DateField(widget=NumberInput(attrs={'type': 'date'}))
+    date_of_death = DateField(widget=NumberInput(attrs={'type': 'date'}))
+
+    def clean_name(self):
+        initial_name = self.cleaned_data['name']  # původní name od uživatele
+        return initial_name.strip().capitalize()  # odstraníme prázdné znaky na začátku a konci textu + zvětšíme první znak
+
+    def clean(self):
+        initial_data = super().clean()
+        if initial_data['date_of_birth'] and initial_data['date_of_death']:
+            if initial_data['date_of_birth'] >= initial_data['date_of_death']:
+                raise ValidationError("Date of death must be after date of birth.")
+        return initial_data
+
+
+class PeopleCreateView(CreatePopupMixin, CreateView):
+    template_name = 'form_creator.html'
+    form_class = PeopleModelForm
+    success_url = reverse_lazy('creators')
+
+    def form_invalid(self, form):
+        LOGGER.warning('User provided invalid data.')
+        return super().form_invalid(form)
+
+
+class PeopleUpdateView(UpdateView):
+    template_name = 'form_creator.html'
+    model = People
+    form_class = PeopleModelForm
+    success_url = reverse_lazy('creators')
+
+    def form_invalid(self, form):
+        LOGGER.warning('User provided invalid data while updating a creator.')
+        return super().form_invalid(form)
+
+
+class PeopleDeleteView(DeleteView):
+    template_name = 'creator_confirm_delete.html'
+    model = People
+    success_url = reverse_lazy('creators')

@@ -1,16 +1,19 @@
 from concurrent.futures._base import LOGGER
 
-from django.forms import Form
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import TemplateView, ListView, FormView, CreateView, DeleteView, UpdateView
+from django.views.generic import TemplateView, ListView, FormView, CreateView, UpdateView, DeleteView
 from django_addanother.views import CreatePopupMixin
 from django_addanother.widgets import AddAnotherWidgetWrapper
+
 from viewer.models import *
 
 from django.forms import *
+
 
 def hello(request):
     return HttpResponse('Hello, world!')
@@ -27,6 +30,7 @@ def hello3(request):
     return HttpResponse(f'Hello, {s} world!')
 
 
+@login_required
 def hello4(request):
     adjectives = ['nice', 'beautiful', 'cruel', 'blue', 'green']
     context = {'adjectives': adjectives, 'name': 'Petr'}
@@ -159,27 +163,6 @@ class GenreTemplateView(TemplateView):
         return context
 
 
-class GenresView(View):
-    def get(self, request):
-        genres = Genre.objects.all()
-        context = {'genres': genres}
-        return render(request, "genres.html", context)
-
-
-class GenresTemplateView(TemplateView):
-    template_name = "genres.html"
-    extra_context = {'genres': Genre.objects.all()}
-
-
-class CreatorsTemplateView(TemplateView):
-    template_name = "creators.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["creators"] = People.objects.all()
-        return context
-
-
 class CreatorsListView(ListView):
     template_name = "creators.html"
     model = People
@@ -195,26 +178,28 @@ class CreatorTemplateView(TemplateView):
         context["creator"] = People.objects.get(id=pk)
         return context
 
-"""
+
 # Forms
+"""
 class MovieForm(Form):
     title_orig = CharField(max_length=185)  # https://cs.wikipedia.org/wiki/Lopadotemachoselachogaleokranioleipsanodrimhypotrimmatosilphioparaomelitokatakechymenokichlepikossyphophattoperisteralektryonoptekephalliokigklopeleiolagoiosiraiobaphetraganopterygon
     title_cz = CharField(max_length=185, required=False)
-    # countries = ModelChoiceField(queryset=Country)
-    # directors = ModelChoiceField(queryset=People)
-    # actors = ModelChoiceField(queryset=People)
+    #countries = ModelChoiceField(queryset=Country)
+    #directors = ModelChoiceField(queryset=People)
+    #actors = ModelChoiceField(queryset=People)
+    #genres = ModelChoiceField(queryset=Genre)
     length = IntegerField(min_value=1, required=False)
-    # genre = ModelChoiceField(queryset=Genre)
-    # genres = ModelChoiceField(queryset=Genre)
     rating = IntegerField(min_value=0, max_value=100, required=False)
     released = DateField()
     description = CharField(widget=Textarea, required=False)
 """
+
 """
 class MovieCreateView(FormView):
     template_name = 'form.html'
     form_class = MovieForm
 """
+
 """
 class MovieCreate(View):
 
@@ -234,12 +219,13 @@ class MovieCreate(View):
                 released=released,
                 description=description
             )
-            return movies(request)
+        return movies(request)
 """
+
 
 def capitalized_validator(value):
     if value[0].islower():
-        raise ValidationError("Value must be capitalized")
+        raise ValidationError('Value must be capitalized.')
 
 
 class PastMonthField(DateField):
@@ -255,12 +241,12 @@ class PastMonthField(DateField):
 
 
 class MovieModelForm(ModelForm):
-
     class Meta:
         model = Movie
-        fields = '__all__'   ## pokud chci zobrazit vsechny
-        # fields = ['title_orig', 'title_cz', 'length', 'rating', 'released', 'description']
-        # exclude = ['released', 'description']
+        fields = '__all__'
+        #fields = ['title_cz', 'title_orig']
+        #exclude = ['title_cz']
+        #exclude = []
         widgets = {
             'directors': AddAnotherWidgetWrapper(
                 SelectMultiple,
@@ -268,8 +254,8 @@ class MovieModelForm(ModelForm):
             )
         }
 
-    rating = IntegerField(min_value=0, max_value=100)
-    length = IntegerField(min_value=1)
+    rating = IntegerField(min_value=0, max_value=100, required=False)
+    length = IntegerField(min_value=1, required=False)
     released = DateField(widget=NumberInput(attrs={'type': 'date'}))
 
     def clean_title_orig(self):
@@ -280,15 +266,22 @@ class MovieModelForm(ModelForm):
         initial = self.cleaned_data['title_cz']
         return initial.strip()
 
+    """def clean(self):
+        pass"""
 
-class MovieCreateView(CreateView):
+
+class MovieCreateView(LoginRequiredMixin, CreateView):
     template_name = 'form.html'
     form_class = MovieModelForm
     success_url = reverse_lazy('movies')
 
     def form_invalid(self, form):
-        LOGGER.warning('Form invalid')
+        LOGGER.warning('Invalid data in MovieCreateView.')
         return super().form_invalid(form)
+
+
+# TODO: MovieUpdateView
+# TODO: MovieDeleteView
 
 
 class PeopleForm(Form):
@@ -362,7 +355,7 @@ class PeopleModelForm(ModelForm):
         return initial_data
 
 
-class PeopleCreateView(CreatePopupMixin, CreateView):
+class PeopleCreateView(LoginRequiredMixin, CreatePopupMixin, CreateView):
     template_name = 'form_creator.html'
     form_class = PeopleModelForm
     success_url = reverse_lazy('creators')
@@ -372,7 +365,7 @@ class PeopleCreateView(CreatePopupMixin, CreateView):
         return super().form_invalid(form)
 
 
-class PeopleUpdateView(UpdateView):
+class PeopleUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'form_creator.html'
     model = People
     form_class = PeopleModelForm
@@ -383,7 +376,17 @@ class PeopleUpdateView(UpdateView):
         return super().form_invalid(form)
 
 
-class PeopleDeleteView(DeleteView):
+class PeopleDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'creator_confirm_delete.html'
     model = People
     success_url = reverse_lazy('creators')
+
+"""
+# TODO: GenreCreateView
+# TODO: GenreUpdateView
+# TODO: GenreDeleteView
+# 
+# TODO: CountryCreateView
+# TODO: CountryUpdateView
+# TODO: CountryDeleteView
+"""

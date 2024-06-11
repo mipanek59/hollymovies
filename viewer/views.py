@@ -381,7 +381,7 @@ class PeopleDeleteView(LoginRequiredMixin, DeleteView):
     model = People
     success_url = reverse_lazy('creators')
 
-"""
+
 # TODO: GenreCreateView
 # TODO: GenreUpdateView
 # TODO: GenreDeleteView
@@ -389,4 +389,4 @@ class PeopleDeleteView(LoginRequiredMixin, DeleteView):
 # TODO: CountryCreateView
 # TODO: CountryUpdateView
 # TODO: CountryDeleteView
-"""
+
